@@ -13,6 +13,7 @@ SourceFiles
 #ifndef nongrayRad_Pn_H
 #define nongrayRad_Pn_H
 
+#include "grayPn.H"
 #include "basicNongrayRadiation.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -31,30 +32,25 @@ class Pn
     public basicNongrayRadiation
 {
     // Private data
-	  // data for self calcuation
-        //- Incident radiation / [W/m^2]
-        volScalarField G_;
+        //- Configuration coefficients
+        dictionary PnCoeffs_;
+	
+        //- spectral Pn
+        PtrList<grayPn> Pns_;
 
-        //- Total Emission contribution [W/m^2]
-        volScalarField E_;
+        //- Radiative heat source
+        autoPtr<volScalarField> Sh_;
 
-        //- Radiative heat source [W/m^3]
-        volScalarField Sh_;
+        //- Incident radiation  [W/m2]
+        PtrList<volScalarField> G_;
 
-    		//- Radiative heat flux to wall [W/m^2]
-		    volScalarField Qr_;
-
-		    //- internal calculation Gg_
-		    PtrList<volScalarField> Gg_;
-
-		    //- Extra coefficients
-		    dictionary PnCoeffs_;
-
-  	  	//- linear-anisotropic coefficient
-		    scalar A1_; 
+        //- Total radiative heat flux [W/m2]
+        //volScalarField Qr_;
 
     // Private Member Functions
-
+	//- Initialise
+	void initialise();
+	
         //- Disallow default bitwise copy construct
         Pn(const Pn&);
 
@@ -112,7 +108,7 @@ public:
             //- Read radiation properties dictionary
             bool read();
 
-
+        // Return sources
 		// source term to enthalpy
 		virtual tmp<volScalarField> Sh() const;
 
