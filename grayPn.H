@@ -32,16 +32,17 @@ namespace nongrayRadiation
 class grayPn
 {
 
-		typedef coupleControl::solverPerformance solverPerformance;
+    typedef coupleControl::solverPerformance solverPerformance;
 
-		typedef coupleControl::solverPerformanceList solverPerformanceList;
+    typedef coupleControl::solverPerformanceList solverPerformanceList;
+    
     // Private data
 
-		//- prefix
-		const word prefix_;
+        //- prefix
+        const word prefix_;
 
-		//- mesh
-		const fvMesh & mesh_;
+        //- mesh
+        const fvMesh & mesh_;
 
         //- Total absorption coefficient [1/m]
         const volScalarField & absc_;
@@ -52,17 +53,17 @@ class grayPn
         //- Total emission [unit varies with spectral model]
         const volScalarField & E_;
 
-		// Configurations
-		const dictionary & coeffs_;
+        //- Configurations
+        const dictionary & coeffs_;
 
-		autoPtr<PnOrderModel> order_;
+        //- Order model
+        autoPtr<PnOrderModel> order_;
 
-    Switch Write_;
+        //- Write control
+        Switch Write_;
 
-		// Calculation
-
-		//- Couple control
-		coupleControl couple_;
+        //- Couple control
+        coupleControl couple_;
 
         //- List of pointers to radiative intensity
         PtrList<PnIntensity> Inm_;
@@ -73,7 +74,7 @@ class grayPn
         //- Total radiative heat flux [W/m2]
         volScalarField Qr_;
 
-         //- Emmited radiative heat flux [W/m2]
+        //- Emmited radiative heat flux [W/m2]
         volScalarField Qem_;
 
         //- Incidet radiative heat flux [W/m2]
@@ -137,8 +138,8 @@ public:
 
         // Access
 
-			//- Mesh
-			inline const fvMesh& mesh() const;
+            //- Mesh
+            inline const fvMesh& mesh() const;
 
             //- Intensity for order n, m
             inline const PnIntensity& Inm(const label n, const label m) const;
@@ -170,15 +171,16 @@ public:
             //- Const access to emitted radiative heat flux field
             inline const volScalarField& Qem() const;
 
-			//- Const access to spherical harmonic coefficient model
-			inline const PnOrderModel & order() const;
+            //- Const access to spherical harmonic coefficient model
+            inline const PnOrderModel & order() const;
 
             //- Return omegaMax
             inline scalar omegaMax() const;
 
 private:
-			//- Check convergence
-			bool checkConvergence(const solverPerformanceList &);
+            //- Check convergence
+            bool checkConvergence(const solverPerformanceList &);
+
 };
 
 
