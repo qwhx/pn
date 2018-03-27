@@ -1,4 +1,4 @@
-#include "grayPn.H"
+#include "Pn.H"
 #include "addToRunTimeSelectionTable.H"
 
 
